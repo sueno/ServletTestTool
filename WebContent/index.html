@@ -1,17 +1,87 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS"/>
-		<title>index</title>
-	</head>
-	<body>
-		<center>
-			hogetest
-			<form action="/HogeTest/BankServlet" method="get">
-				<input type="hidden" name="command" value="menu">
-				<input type="submit" value="利用する">
-			</form>
-		</center>
-		
-	</body>
+<head>
+<style type="text/css">
+div {
+width: 100%;
+height: 100%;
+margin-bottom: 1.5em;
+background-color: #ffffff;
+border: 1px #c0c0c0 solid;
+color: #000000;
+}
+div.log { overflow: scroll; }
+</style>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>jQuery Sample</title>
+<link rel="stylesheet" href="css/main.css" type="text/css" media="all">
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	
+<script type="text/javascript">
+		$.get("http://localhost:8080/HogeTest/HogeServlet", null, function(data, status){
+			timerID = setTimeout("log_reload()",1000);
+			//alert(data)
+		})
+</script>
+<script>
+	$.getJSON("http://localhost:8080/HogeTest/HogeJson", null, function(data,
+			status) {
+		$('#data').html("")
+		for(var i in data){
+			$("#data").append("** " + i + " **********************<br>");
+			for (var j in data[i]) {
+				$("#data").append("  "+j+" : "+data[i][j]+"<br>");
+			}
+		}
+	})
+</script>
+<script type="text/javascript">
+function btn_reload() {
+	$.getJSON("http://localhost:8080/HogeTest/HogeJson", null, function(data,
+			status) {
+		$('#data').html("")
+		for(var i in data){
+			$("#data").append("** " + i + " **********************<br>");
+			for (var j in data[i]) {
+				$("#data").append("  "+j+" : "+data[i][j]+"<br>");
+			}
+		}
+	})
+}
+</script>
+<script>
+function log_reload() {
+	$.getJSON("http://localhost:8080/HogeTest/HogeJson", null, function(data,
+			status) {
+		$('#data').html("")
+		for(var i in data){
+			$("#data").append("** " + i + " **********************<br>");
+			for (var j in data[i]) {
+				$("#data").append("  "+j+" : "+data[i][j]+"<br>");
+			}
+		}
+	})
+	timerID = setTimeout("log_reload()",1000);
+}
+</script>
+
+
+</head>
+<body>
+	test6
+	<p id="start"></p>
+	<input name="btn" type="button" value="reload" onClick="btn_reload()">
+	<center>
+	<table border="1" cellpadding="5" width="90%" height="550">
+		<tr valign="top">
+			<td width="50%"><!--<div id="servlet">hoge</div>-->
+			<iframe width="100%" height="545" src="index.html" scrolling="yes"></iframe>
+			</td>
+			<td width="50%" height="545"><div class="log" id="data"></div></td>
+		</tr>
+	</table>
+	</center>
+</body>
 </html>
